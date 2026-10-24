@@ -1,8 +1,30 @@
+# Artefactos de compilación y dependencias
+node_modules/
+dist/
+build/
+coverage/
+target/
+src-tauri/target/
+src-tauri/gen/
+
+# Registros y entorno
+*.log
+.env
+.env.*
+!.env.example
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+
 # Especificaciones privadas: viven en un repo privado propio por proyecto.
-# No se trackean ni se mencionan jamas en este repositorio publico.
 specs
 .specify
 specs-privado/
 
-# Integracion local de OpenCode: comandos y estado de la maquina, no del repo.
+# Integración local de OpenCode: comandos y estado de la máquina, no del repo.
 .opencode

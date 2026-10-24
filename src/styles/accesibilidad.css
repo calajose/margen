@@ -1,0 +1,30 @@
+/* Accesibilidad (FR-028): foco visible reforzado y orden predecible. */
+
+:root {
+  --foco-grosor: 3px;
+}
+
+:focus-visible {
+  outline: var(--foco-grosor) solid var(--foco);
+  outline-offset: 3px;
+}
+
+/* Nunca acciones solo-icono: si hay un icono, el texto acompaña. */
+[data-solo-icono='true'] {
+  display: none;
+}
+
+/* Objetivos táctiles mínimos en barras y avisos. */
+.barra-estado button,
+.aviso button {
+  min-height: 28px;
+  min-width: 28px;
+}
+
+/* Texto de estado siempre legible en alto contraste. */
+@media (prefers-contrast: more) {
+  :root {
+    --texto-suave: var(--texto);
+    --borde: var(--texto);
+  }
+}

@@ -1,0 +1,170 @@
+:root {
+  --fondo: #fbfaf8;
+  --texto: #1c1c1c;
+  --texto-suave: #5f5f5f;
+  --borde: #e2ded8;
+  --acento: #2f6f5e;
+  --foco: #2f6f5e;
+  --seleccion: #dfeee8;
+  --fuente-texto: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --fuente-ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --tamano-texto: 18px;
+  --interlineado: 1.65;
+  --ancho-columna: 72ch;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente-ui);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.lienzo {
+  flex: 1;
+  width: min(100%, calc(var(--ancho-columna)));
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+  font-family: var(--fuente-texto);
+  font-size: var(--tamano-texto);
+  line-height: var(--interlineado);
+  outline: none;
+}
+
+.lienzo:focus-visible,
+.lienzo .ProseMirror:focus-visible,
+.lienzo .cm-editor:focus-visible {
+  outline: 2px solid var(--foco);
+  outline-offset: 4px;
+}
+
+.lienzo h1,
+.lienzo h2,
+.lienzo h3,
+.lienzo h4,
+.lienzo h5,
+.lienzo h6 {
+  font-family: var(--fuente-ui);
+  line-height: 1.25;
+  margin: 1.6em 0 0.5em;
+}
+
+.lienzo blockquote {
+  margin: 1.2em 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--borde);
+  color: var(--texto-suave);
+}
+
+.lienzo code {
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.92em;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+.lienzo pre code {
+  display: block;
+  padding: 0.9rem;
+  overflow-x: auto;
+}
+
+.lienzo table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.lienzo th,
+.lienzo td {
+  border: 1px solid var(--borde);
+  padding: 0.35rem 0.6rem;
+  text-align: left;
+}
+
+.lienzo img {
+  max-width: 100%;
+}
+
+.barra-estado {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.35rem 1rem;
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  background: color-mix(in srgb, var(--fondo) 92%, transparent);
+  border-top: 1px solid var(--borde);
+  backdrop-filter: blur(4px);
+}
+
+.barra-estado[hidden] {
+  display: none;
+}
+
+.barra-estado button {
+  font: inherit;
+  color: var(--texto-suave);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  cursor: pointer;
+}
+
+.barra-estado button[aria-pressed='true'] {
+  color: var(--texto);
+  border-color: var(--borde);
+  background: var(--fondo);
+}
+
+.barra-estado button:focus-visible {
+  outline: 2px solid var(--foco);
+  outline-offset: 2px;
+}
+
+.aviso {
+  position: fixed;
+  right: 1rem;
+  bottom: 2.6rem;
+  max-width: 26rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  background: var(--fondo);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-left: 3px solid var(--acento);
+  border-radius: 4px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.aviso button {
+  font: inherit;
+  margin-right: 0.6rem;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--borde);
+  border-radius: 3px;
+  background: var(--fondo);
+  color: inherit;
+  cursor: pointer;
+}
+
+.aviso button:focus-visible {
+  outline: 2px solid var(--foco);
+  outline-offset: 2px;
+}

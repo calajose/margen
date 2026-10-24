@@ -1,0 +1,51 @@
+@media (prefers-color-scheme: dark) {
+  :root[data-tema='auto'] {
+    --fondo: #1b1b1a;
+    --texto: #e8e5e0;
+    --texto-suave: #a5a19a;
+    --borde: #35332f;
+    --acento: #7fbfa8;
+    --foco: #7fbfa8;
+    --seleccion: #2e443c;
+  }
+}
+
+:root[data-tema='oscuro'] {
+  --fondo: #1b1b1a;
+  --texto: #e8e5e0;
+  --texto-suave: #a5a19a;
+  --borde: #35332f;
+  --acento: #7fbfa8;
+  --foco: #7fbfa8;
+  --seleccion: #2e443c;
+}
+
+:root[data-tema='claro'] {
+  --fondo: #fbfaf8;
+  --texto: #1c1c1c;
+  --texto-suave: #5f5f5f;
+  --borde: #e2ded8;
+  --acento: #2f6f5e;
+  --foco: #2f6f5e;
+  --seleccion: #dfeee8;
+}
+
+::selection {
+  background: var(--seleccion);
+}
+
+/* Foco visible coherente en todas las superficies (FR-028). */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--foco);
+  outline-offset: 2px;
+}
+
+/* Respeto a la preferencia de movimiento reducido (Principio IV). */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

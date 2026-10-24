@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PoC de Margen</title>
+    <link rel="stylesheet" href="/src/styles/base.css" />
+    <style>
+      body { padding: 2rem; font-family: system-ui, sans-serif; }
+      .poc { max-width: 900px; margin: 0 auto; }
+      .panel { border: 1px solid var(--borde); border-radius: 6px; padding: 1rem; margin: 1rem 0; }
+      .metricas { font-family: ui-monospace, monospace; font-size: 0.85rem; white-space: pre-wrap; }
+      .resultado-ok { color: #1f7a4d; }
+      .resultado-fallo { color: #b3261e; }
+      button { font: inherit; padding: 0.35rem 0.7rem; margin-right: 0.5rem; }
+      select { font: inherit; padding: 0.3rem; }
+    </style>
+  </head>
+  <body>
+    <main class="poc">
+      <h1>PoC de Margen</h1>
+      <p>
+        Verificación manual de las 10 validaciones del plan (§2). No forma parte de la aplicación
+        final. Los resultados se registran en <code>specs/001-minimalist-markdown-editor/poc-results.md</code>.
+      </p>
+      <div class="panel">
+        <label for="documento">Documento:</label>
+        <select id="documento"></select>
+        <button id="cargar" type="button">Cargar en visual</button>
+        <button id="conmutar" type="button">Conmutar modo</button>
+        <button id="deshacer" type="button">Deshacer ×15</button>
+        <button id="verificar" type="button">Verificar fidelidad</button>
+      </div>
+      <div id="lienzo" class="lienzo" style="min-height: 300px"></div>
+      <div class="panel metricas" id="metricas">Sin datos todavía.</div>
+      <div class="panel" id="resultados"></div>
+    </main>
+    <script type="module" src="/src/poc/poc.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+- [ ] pendiente
+- [x] completada
+- [ ] otra pendiente

@@ -1,0 +1,28 @@
+/* Modo concentración (FR-014/FR-016): sin barras, columna centrada, sin animación. */
+.app.concentracion .barra-estado {
+  display: none;
+}
+
+.app.concentracion .lienzo {
+  padding-top: 12vh;
+  padding-bottom: 40vh;
+}
+
+.app.concentracion .aviso {
+  display: none;
+}
+
+/* Máquina de escribir: la línea activa se mantiene centrada verticalmente. */
+.lienzo.maquina-escribir {
+  scroll-padding-block: 50vh;
+}
+
+/* En modo lectura no se muestra ningún cursor de edición. */
+.lienzo.lectura {
+  user-select: text;
+}
+
+.lienzo.lectura [contenteditable='true'],
+.lienzo.lectura .cm-content {
+  caret-color: transparent;
+}
