@@ -26,28 +26,87 @@ body {
   font-family: var(--fuente-ui);
 }
 
+body {
+  overflow: hidden;
+}
+
 .app {
   display: flex;
   flex-direction: column;
+  height: 100vh;
   min-height: 100vh;
 }
 
 .lienzo {
   flex: 1;
-  width: min(100%, calc(var(--ancho-columna)));
+  overflow-y: auto;
+  width: min(100%, calc(var(--ancho-columna) + 4rem));
   margin: 0 auto;
-  padding: 4rem 1.5rem 6rem;
+  padding: 3.5rem 2rem 6rem;
   font-family: var(--fuente-texto);
   font-size: var(--tamano-texto);
   line-height: var(--interlineado);
   outline: none;
+  scrollbar-gutter: stable;
 }
 
+/* La superficie editable ocupa todo el alto disponible: se puede hacer clic
+   en cualquier punto de la columna, no solo en la línea que ya tiene texto. */
+.lienzo .editor-visual,
+.lienzo .editor-fuente {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.lienzo .milkdown {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.lienzo .ProseMirror {
+  position: relative;
+  flex: 1;
+  min-height: calc(100vh - 12rem);
+  outline: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+/* Pista discreta cuando el documento está vacío. */
+.lienzo .ProseMirror > p:only-child:has(> br.ProseMirror-trailingBreak)::before {
+  content: 'Escribe en Markdown…';
+  position: absolute;
+  color: var(--texto-suave);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.lienzo .ProseMirror > *:first-child {
+  margin-top: 0;
+}
+
+.lienzo .cm-editor {
+  min-height: calc(100vh - 12rem);
+}
+
+.lienzo .cm-scroller {
+  overflow: visible;
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  line-height: 1.55;
+}
+
+.lienzo .cm-editor.cm-focused {
+  outline: none;
+}
+
+/* El cursor de texto ya indica el foco dentro del documento; un contorno
+   alrededor de toda la superficie editable resultaba visualmente pesado. */
 .lienzo:focus-visible,
 .lienzo .ProseMirror:focus-visible,
 .lienzo .cm-editor:focus-visible {
-  outline: 2px solid var(--foco);
-  outline-offset: 4px;
+  outline: none;
 }
 
 .lienzo h1,

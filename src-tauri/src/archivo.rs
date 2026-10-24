@@ -154,13 +154,18 @@ pub fn observar_archivo(
 }
 
 #[tauri::command]
-pub fn seleccionar_archivo(app: AppHandle) -> Result<Option<String>, ErrorApp> {
-    let seleccion = app
-        .dialog()
-        .file()
-        .add_filter("Markdown", &["md", "markdown"])
-        .add_filter("Texto", &["txt"])
-        .blocking_pick_file();
+pub async fn seleccionar_archivo(app: AppHandle) -> Result<Option<String>, ErrorApp> {
+    // El diálogo nativo es bloqueante. Ejecutarlo en un hilo de trabajo evita
+    // bloquear el hilo principal de la interfaz (la app se congelaba aquí).
+    let seleccion = tauri::async_runtime::spawn_blocking(move || {
+        app.dialog()
+            .file()
+            .add_filter("Markdown", &["md", "markdown"])
+            .add_filter("Texto", &["txt"])
+            .blocking_pick_file()
+    })
+    .await
+    .map_err(|_| ErrorApp::Desconocido)?;
 
     match seleccion {
         None => Ok(None),
@@ -172,18 +177,21 @@ pub fn seleccionar_archivo(app: AppHandle) -> Result<Option<String>, ErrorApp> {
 }
 
 #[tauri::command]
-pub fn guardar_como(
+pub async fn guardar_como(
     app: AppHandle,
     contenido: String,
     estado: State<'_, EstadoArchivos>,
 ) -> Result<Option<ResultadoGuardado>, ErrorApp> {
-    let seleccion = app
-        .dialog()
-        .file()
-        .add_filter("Markdown", &["md", "markdown"])
-        .add_filter("Texto", &["txt"])
-        .set_file_name("documento.md")
-        .blocking_save_file();
+    let seleccion = tauri::async_runtime::spawn_blocking(move || {
+        app.dialog()
+            .file()
+            .add_filter("Markdown", &["md", "markdown"])
+            .add_filter("Texto", &["txt"])
+            .set_file_name("documento.md")
+            .blocking_save_file()
+    })
+    .await
+    .map_err(|_| ErrorApp::Desconocido)?;
 
     let Some(ruta) = seleccion else {
         return Ok(None);

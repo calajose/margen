@@ -69,6 +69,15 @@ const barraEstado = new BarraEstado(barra, documento, {
 });
 estadoUi.barra = barraEstado;
 
+// Al hacer clic en el margen o en la zona vacía bajo el texto, el foco vuelve
+// al editor activo. Sin esto, el área editable parecía limitarse a la línea
+// que ya contenía texto.
+lienzo.addEventListener('pointerdown', (evento) => {
+  const objetivo = evento.target as HTMLElement | null;
+  if (objetivo?.closest('.ProseMirror, .cm-editor')) return;
+  control.vistaActiva.enfocar();
+});
+
 documento.suscribir(() => {
   barraEstado.refrescar(control.modo);
   actualizarTitulo();
@@ -130,15 +139,10 @@ async function abrir(): Promise<void> {
 }
 
 async function nuevo(): Promise<void> {
-  const cierre = new Cierre(
-    documento,
-    dialogoCierreNativo(),
-    guardar,
-    () => {
-      documento.cargar('', null);
-      control.refrescar();
-    },
-  );
+  const cierre = new Cierre(documento, dialogoCierreNativo(), guardar, () => {
+    documento.cargar('', null);
+    control.refrescar();
+  });
   await cierre.solicitarCierre();
 }
 
@@ -281,7 +285,7 @@ async function iniciar(): Promise<void> {
   }
 
   await conectarEventosTauri();
-  (lienzo as HTMLElement).focus();
+  control.vistaActiva.enfocar();
   actualizarTitulo();
 }
 

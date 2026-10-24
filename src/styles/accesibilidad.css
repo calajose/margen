@@ -4,7 +4,16 @@
   --foco-grosor: 3px;
 }
 
-:focus-visible {
+/* Foco visible reforzado en los controles interactivos. Las superficies
+   editables (ProseMirror, CodeMirror) no llevan contorno: en un editor de
+   texto el cursor ya cumple esa función y el marco rodeaba toda la columna. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
   outline: var(--foco-grosor) solid var(--foco);
   outline-offset: 3px;
 }
