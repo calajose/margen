@@ -1,0 +1,5 @@
+# Especificaciones privadas: viven en un repo privado propio por proyecto.
+# No se trackean ni se mencionan jamas en este repositorio publico.
+specs
+.specify
+specs-privado/
