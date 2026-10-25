@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Margen
+GenericName=Editor Markdown
+Comment=Editor Markdown minimalista de escritura sin distracciones
+Exec=margen
+Icon=margen
+Terminal=false
+Categories=Utility;TextEditor;
+Keywords=markdown;editor;texto;escritura;
+StartupNotify=true

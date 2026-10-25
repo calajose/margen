@@ -1,0 +1,42 @@
+# Empaquetado de Margen para Arch Linux / CachyOS (formato pacman).
+#
+# Tauri v2 ya no incluye el bundler de pacman (solo deb, rpm y appimage en
+# Linux), así que construimos el .pkg.tar.zst con nFPM a partir del binario
+# que genera `npm run tauri:build`.
+#
+# Uso local: npm run empaquetar:arch  (ver scripts/empaquetar-arch.mjs)
+name: margen
+arch: amd64 # nFPM lo traduce a x86_64 en el paquete de Arch
+platform: linux
+version: ${VERSION} # lo inyecta el script desde src-tauri/tauri.conf.json
+release: "1"
+maintainer: calajose <calajose@users.noreply.github.com>
+description: Margen - editor Markdown minimalista de escritura sin distracciones, local y sin red.
+homepage: https://github.com/calajose/margen
+license: MIT
+archlinux:
+  packager: calajose
+contents:
+  - src: src-tauri/target/release/margen
+    dst: /usr/bin/margen
+  - src: packaging/margen.desktop
+    dst: /usr/share/applications/margen.desktop
+  - src: src-tauri/icons/32x32.png
+    dst: /usr/share/icons/hicolor/32x32/apps/margen.png
+  - src: src-tauri/icons/64x64.png
+    dst: /usr/share/icons/hicolor/64x64/apps/margen.png
+  - src: src-tauri/icons/128x128.png
+    dst: /usr/share/icons/hicolor/128x128/apps/margen.png
+  - src: src-tauri/icons/128x128@2x.png
+    dst: /usr/share/icons/hicolor/256x256/apps/margen.png
+  - src: src-tauri/icons/icon.png
+    dst: /usr/share/icons/hicolor/512x512/apps/margen.png
+overrides:
+  archlinux:
+    depends:
+      - webkit2gtk-4.1
+      - gtk3
+      - libayatana-appindicator
+      - librsvg
+      - hicolor-icon-theme
+      - xdg-utils
