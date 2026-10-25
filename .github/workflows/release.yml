@@ -37,6 +37,7 @@ jobs:
         run: cargo check --manifest-path src-tauri/Cargo.toml
 
   build:
+    name: build (${{ matrix.os }})
     needs: test
     strategy:
       fail-fast: false
